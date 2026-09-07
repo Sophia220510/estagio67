@@ -44,28 +44,28 @@ const practical = [
     n: "01",
     title: "Preparação",
     body: "Organização de materiais, equipamentos, bancada e identificação de amostras.",
-    image: "/images/pratica-bancada.webp",
+    image: "./images/pratica-bancada.webp",
     alt: "Participantes em atividade prática na bancada do laboratório",
   },
   {
     n: "02",
     title: "Amostras",
     body: "Contato com recebimento, identificação, preparo, processamento e acompanhamento de análises.",
-    image: "/images/equipamentos.webp",
+    image: "./images/equipamentos.webp",
     alt: "Rotina técnica com equipamentos e amostras laboratoriais",
   },
   {
     n: "03",
     title: "Técnicas e equipamentos",
     body: "Execução supervisionada de técnicas compatíveis e compreensão dos processos da rotina.",
-    image: "/images/pratica-alunos.webp",
+    image: "./images/pratica-alunos.webp",
     alt: "Atividade de formação prática em análises clínicas",
   },
   {
     n: "04",
     title: "Qualidade e biossegurança",
     body: "Registros, conferências, controle de qualidade, EPIs, descarte, higienização e segurança.",
-    image: "/images/equipe-wide.webp",
+    image: "./images/equipe-wide.webp",
     alt: "Equipe do Laboratório Santa Helena em ambiente técnico",
   },
 ];
@@ -251,7 +251,7 @@ function App() {
           </div>
           <div className="hero-visual">
             <img
-              src="/images/pratica-alunos.webp"
+              src="./images/pratica-alunos.webp"
               width="900"
               height="1125"
               alt="Participantes vivenciando a rotina de análises clínicas"
@@ -295,7 +295,7 @@ function App() {
           </Reveal>
           <Reveal className="portrait-wrap">
             <img
-              src="/images/paulo-evento-tratado.webp"
+              src="./images/paulo-evento-tratado.webp"
               width="1024"
               height="1536"
               loading="lazy"
@@ -367,7 +367,7 @@ function App() {
         <section className="section congress">
           <div className="congress-image">
             <img
-              src="/images/congresso-portrait.webp"
+              src="./images/congresso-portrait.webp"
               width="800"
               height="1100"
               loading="lazy"
@@ -383,7 +383,7 @@ function App() {
               docência, congressos e formação continuada.
             </p>
             <img
-              src="/images/congresso-wide.webp"
+              src="./images/congresso-wide.webp"
               width="900"
               height="600"
               loading="lazy"
@@ -505,17 +505,17 @@ function App() {
           <div className="gallery-grid">
             {[
               [
-                "/images/equipe-grupo.webp",
+                "./images/equipe-grupo.webp",
                 "Equipe e participantes no laboratório",
               ],
-              ["/images/pratica-bancada.webp", "Formação prática na bancada"],
+              ["./images/pratica-bancada.webp", "Formação prática na bancada"],
               [
-                "/images/equipamentos.webp",
+                "./images/equipamentos.webp",
                 "Contato supervisionado com equipamentos",
               ],
-              ["/images/congresso-wide.webp", "Dr. Paulo em congresso da área"],
+              ["./images/congresso-wide.webp", "Dr. Paulo em congresso da área"],
               [
-                "/images/equipe-wide.webp",
+                "./images/equipe-wide.webp",
                 "Equipe do Laboratório Santa Helena",
               ],
             ].map(([src, alt], i) => (
@@ -630,7 +630,7 @@ function App() {
         <section className="section real-lab">
           <div>
             <img
-              src="/images/pratica-bancada.webp"
+              src="./images/pratica-bancada.webp"
               width="1000"
               height="700"
               loading="lazy"
@@ -662,7 +662,7 @@ function App() {
 
         <section id="participar" className="final-cta section-anchor">
           <img
-            src="/images/equipe-wide.webp"
+            src="./images/equipe-wide.webp"
             loading="lazy"
             alt="Equipe e participantes do Laboratório Santa Helena"
           />
