@@ -6,11 +6,15 @@ import {
   Check,
   ChevronDown,
   Menu,
+  MessageCircle,
   X,
 } from "lucide-react";
 import "./styles.css";
 
-const TEPAC_CONTACT_URL = "tel:+551155759488";
+const WHATSAPP_MESSAGE =
+  "Olá, me interessei pelo programa de estágio TEPAC e gostaria de saber mais informações.";
+const TEPAC_CONTACT_URL = `https://wa.me/5511979768189?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+const INSTAGRAM_URL = "https://www.instagram.com/pauloapbrandao/";
 
 const photos = {
   hero: {
@@ -93,7 +97,10 @@ const timeline = [
   ["2018–2021", "Coordenador do GTTAC do CRF-SP"],
   ["2024–2025", "Diretor da Região Sudeste da SBAC"],
   ["2025", "Presidente do 50º CBAC"],
-  ["2026", "Presidente do XII Sul Mineiro"],
+  [
+    "2026",
+    "Presidente e palestrante do Congresso Sul Mineiro de Laboratórios Clínicos — XII Edição",
+  ],
 ];
 
 const practical = [
@@ -237,11 +244,37 @@ function Header({ progress, active }) {
 function Eyebrow({ children, light = false }) {
   return <p className={`eyebrow ${light ? "light" : ""}`}>{children}</p>;
 }
-function Button({ href, children, outline = false }) {
+function InstagramIcon({ size = 19 }) {
   return (
-    <a className={`button ${outline ? "outline" : ""}`} href={href}>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect width="18" height="18" x="3" y="3" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r=".75" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+function Button({ href, children, outline = false, variant = "default", icon }) {
+  const external = href.startsWith("http");
+  return (
+    <a
+      className={`button ${outline ? "outline" : ""} ${variant}`}
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+    >
+      {icon}
       {children}
-      <ArrowRight size={17} />
+      {!icon && <ArrowRight size={17} />}
     </a>
   );
 }
@@ -311,8 +344,12 @@ function App() {
             </p>
             <div className="actions">
               <Button href="#na-pratica">Quero conhecer o TEPAC</Button>
-              <Button href="#participar" outline>
-                Quero participar
+              <Button
+                href={TEPAC_CONTACT_URL}
+                variant="whatsapp"
+                icon={<MessageCircle size={19} />}
+              >
+                Falar pelo WhatsApp
               </Button>
             </div>
           </div>
@@ -357,6 +394,14 @@ function App() {
               Biólogo · Farmacêutico-Bioquímico · Especialista em Análises
               Clínicas
             </small>
+            <Button
+              href={INSTAGRAM_URL}
+              outline
+              variant="instagram"
+              icon={<InstagramIcon size={19} />}
+            >
+              @pauloapbrandao
+            </Button>
           </Reveal>
           <Reveal className="portrait-wrap">
             <Photo
@@ -392,6 +437,14 @@ function App() {
               <b>DOCÊNCIA</b>
               <h3>Professor em capacitação e pós-graduação</h3>
               <span>IPESSP · Estácio de Sá · FEF</span>
+            </Reveal>
+            <Reveal className="credential credential-wide">
+              <b>XII EDIÇÃO</b>
+              <h3>
+                Presidente e palestrante do Congresso Sul Mineiro de
+                Laboratórios Clínicos
+              </h3>
+              <span>2026</span>
             </Reveal>
           </div>
         </section>
@@ -454,6 +507,19 @@ function App() {
               para sua modalidade, formação e supervisão.
             </p>
           </Reveal>
+          <div className="lab-process" aria-label="Fluxo da experiência prática">
+            {[
+              ["01", "Identificação"],
+              ["02", "Processamento"],
+              ["03", "Controle"],
+              ["04", "Interpretação"],
+            ].map(([number, label]) => (
+              <span key={number}>
+                <b>{number}</b>
+                {label}
+              </span>
+            ))}
+          </div>
           <div className="practice-flow">
             {practical.map((item, i) => (
               <Reveal
@@ -677,7 +743,23 @@ function App() {
               Conte para nossa equipe o que você estuda ou sua formação e
               descubra qual modalidade pode fazer sentido para você.
             </p>
-            <Button href={TEPAC_CONTACT_URL}>Quero participar do TEPAC</Button>
+            <div className="contact-actions">
+              <Button
+                href={TEPAC_CONTACT_URL}
+                variant="whatsapp"
+                icon={<MessageCircle size={20} />}
+              >
+                Conversar pelo WhatsApp
+              </Button>
+              <Button
+                href={INSTAGRAM_URL}
+                outline
+                variant="instagram"
+                icon={<InstagramIcon size={20} />}
+              >
+                Instagram do Dr. Brandão
+              </Button>
+            </div>
           </div>
         </section>
       </main>
@@ -690,12 +772,22 @@ function App() {
         <nav>
           <a href="#tepac">TEPAC</a>
           <a href="#dr-brandao">Dr. Paulo Brandão</a>
-          <a href={TEPAC_CONTACT_URL}>Contato</a>
+          <a href={TEPAC_CONTACT_URL} target="_blank" rel="noreferrer">
+            WhatsApp
+          </a>
+          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
+            Instagram
+          </a>
         </nav>
       </footer>
       {showMobileCta && active !== "participar" && (
-        <a className="mobile-cta" href={TEPAC_CONTACT_URL}>
-          Quero participar <ArrowRight size={16} />
+        <a
+          className="mobile-cta"
+          href={TEPAC_CONTACT_URL}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <MessageCircle size={18} /> Falar no WhatsApp
         </a>
       )}
     </div>
