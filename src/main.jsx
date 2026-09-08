@@ -7,11 +7,68 @@ import {
   ChevronDown,
   Menu,
   X,
-  ZoomIn,
 } from "lucide-react";
 import "./styles.css";
 
 const TEPAC_CONTACT_URL = "tel:+551155759488";
+
+const photos = {
+  hero: {
+    src: "./images/pratica-bancada.webp",
+    srcSet:
+      "./images/pratica-bancada-640.webp 640w, ./images/pratica-bancada-960.webp 960w, ./images/pratica-bancada-1280.webp 1280w, ./images/pratica-bancada.webp 1609w",
+    width: 1609,
+    height: 1207,
+    position: "50% 45%",
+    alt: "Participantes em atividade prática na bancada do Laboratório Santa Helena",
+  },
+  portrait: {
+    src: "./images/paulo-retrato.webp",
+    srcSet:
+      "./images/paulo-retrato-640.webp 640w, ./images/paulo-retrato-960.webp 960w, ./images/paulo-retrato.webp 1035w",
+    width: 1035,
+    height: 1380,
+    position: "50% 25%",
+    alt: "Dr. Paulo Brandão diante do painel da Sociedade Brasileira de Análises Clínicas",
+  },
+  congress: {
+    src: "./images/congresso-portrait.webp",
+    srcSet:
+      "./images/congresso-portrait-640.webp 640w, ./images/congresso-portrait-960.webp 960w, ./images/congresso-portrait.webp 1035w",
+    width: 1035,
+    height: 1380,
+    position: "50% 20%",
+    alt: "Dr. Paulo Brandão durante o 50º Congresso Brasileiro de Análises Clínicas",
+  },
+  equipment: {
+    src: "./images/equipamentos.webp",
+    srcSet:
+      "./images/equipamentos-640.webp 640w, ./images/equipamentos-960.webp 960w, ./images/equipamentos-1280.webp 1280w, ./images/equipamentos.webp 1609w",
+    width: 1609,
+    height: 1207,
+    position: "50% 42%",
+    alt: "Participantes operando equipamento sob acompanhamento no laboratório",
+  },
+  team: {
+    src: "./images/equipe-grupo.webp",
+    srcSet:
+      "./images/equipe-grupo-640.webp 640w, ./images/equipe-grupo-960.webp 960w, ./images/equipe-grupo-1280.webp 1280w, ./images/equipe-grupo.webp 1609w",
+    width: 1609,
+    height: 1207,
+    position: "50% 40%",
+    alt: "Dr. Paulo Brandão com participantes no Laboratório Santa Helena",
+  },
+};
+
+const institutions = [
+  ["UNINOVE", "./logos/instituicoes/uninove.svg"],
+  ["UniCesumar", "./logos/instituicoes/unicesumar.png"],
+  ["UNIP", "./logos/instituicoes/unip.svg"],
+  ["UNISA — Universidade Santo Amaro", "./logos/instituicoes/unisa.png"],
+  ["Universidade São Judas", "./logos/instituicoes/sao-judas.svg"],
+  ["UNG — Universidade Guarulhos", "./logos/instituicoes/ung.svg"],
+  ["UNISUL", "./logos/instituicoes/unisul.svg"],
+];
 
 const nav = [
   ["TEPAC", "tepac"],
@@ -44,29 +101,22 @@ const practical = [
     n: "01",
     title: "Preparação",
     body: "Organização de materiais, equipamentos, bancada e identificação de amostras.",
-    image: "./images/pratica-bancada.webp",
-    alt: "Participantes em atividade prática na bancada do laboratório",
   },
   {
     n: "02",
     title: "Amostras",
     body: "Contato com recebimento, identificação, preparo, processamento e acompanhamento de análises.",
-    image: "./images/equipamentos.webp",
-    alt: "Rotina técnica com equipamentos e amostras laboratoriais",
   },
   {
     n: "03",
     title: "Técnicas e equipamentos",
     body: "Execução supervisionada de técnicas compatíveis e compreensão dos processos da rotina.",
-    image: "./images/pratica-alunos.webp",
-    alt: "Atividade de formação prática em análises clínicas",
+    photo: photos.equipment,
   },
   {
     n: "04",
     title: "Qualidade e biossegurança",
     body: "Registros, conferências, controle de qualidade, EPIs, descarte, higienização e segurança.",
-    image: "./images/equipe-wide.webp",
-    alt: "Equipe do Laboratório Santa Helena em ambiente técnico",
   },
 ];
 
@@ -196,6 +246,24 @@ function Button({ href, children, outline = false }) {
   );
 }
 
+function Photo({ photo, sizes, priority = false, className = "" }) {
+  return (
+    <img
+      className={className}
+      src={photo.src}
+      srcSet={photo.srcSet}
+      sizes={sizes}
+      width={photo.width}
+      height={photo.height}
+      style={{ objectPosition: photo.position }}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
+      decoding="async"
+      alt={photo.alt}
+    />
+  );
+}
+
 function Reveal({ children, className = "", ...props }) {
   const ref = useRef(null);
   const [seen, setSeen] = useState(false);
@@ -225,7 +293,6 @@ function Reveal({ children, className = "", ...props }) {
 
 function App() {
   const { progress, active, showMobileCta } = usePageState();
-  const [lightbox, setLightbox] = useState(null);
   return (
     <div>
       <Header progress={progress} active={active} />
@@ -250,12 +317,10 @@ function App() {
             </div>
           </div>
           <div className="hero-visual">
-            <img
-              src="./images/pratica-alunos.webp"
-              width="900"
-              height="1125"
-              alt="Participantes vivenciando a rotina de análises clínicas"
-              fetchPriority="high"
+            <Photo
+              photo={photos.hero}
+              sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1200px) 48vw, 620px"
+              priority
             />
             <span className="photo-label">
               Formação em ambiente laboratorial real
@@ -294,12 +359,9 @@ function App() {
             </small>
           </Reveal>
           <Reveal className="portrait-wrap">
-            <img
-              src="./images/paulo-evento-tratado.webp"
-              width="1024"
-              height="1536"
-              loading="lazy"
-              alt="Retrato profissional do Dr. Paulo Brandão em evento da área"
+            <Photo
+              photo={photos.portrait}
+              sizes="(max-width: 760px) 86vw, (max-width: 1100px) 70vw, 450px"
             />
             <span className="vertical-word">EXPERIÊNCIA</span>
           </Reveal>
@@ -366,12 +428,9 @@ function App() {
 
         <section className="section congress">
           <div className="congress-image">
-            <img
-              src="./images/congresso-portrait.webp"
-              width="800"
-              height="1100"
-              loading="lazy"
-              alt="Dr. Paulo Brandão discursando no 50º Congresso Brasileiro de Análises Clínicas"
+            <Photo
+              photo={photos.congress}
+              sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1100px) 70vw, 460px"
             />
           </div>
           <Reveal className="congress-copy">
@@ -382,13 +441,6 @@ function App() {
               Uma trajetória que também passa por entidades profissionais,
               docência, congressos e formação continuada.
             </p>
-            <img
-              src="./images/congresso-wide.webp"
-              width="900"
-              height="600"
-              loading="lazy"
-              alt="Participação do Dr. Paulo Brandão em congresso de análises clínicas"
-            />
           </Reveal>
         </section>
 
@@ -406,17 +458,16 @@ function App() {
             {practical.map((item, i) => (
               <Reveal
                 key={item.n}
-                className={`practice-row ${i % 2 ? "reverse" : ""}`}
+                className={`practice-row ${item.photo ? "has-photo" : "text-only"} ${i % 2 ? "reverse" : ""}`}
               >
-                <div className="practice-image">
-                  <img
-                    src={item.image}
-                    width="900"
-                    height="650"
-                    loading="lazy"
-                    alt={item.alt}
-                  />
-                </div>
+                {item.photo && (
+                  <div className="practice-image">
+                    <Photo
+                      photo={item.photo}
+                      sizes="(max-width: 800px) calc(100vw - 32px), 750px"
+                    />
+                  </div>
+                )}
                 <div>
                   <span>{item.n}</span>
                   <h3>{item.title}</h3>
@@ -467,10 +518,7 @@ function App() {
         <section className="section institutions">
           <Reveal>
             <Eyebrow>QUEM JÁ PASSOU POR AQUI</Eyebrow>
-            <h2>
-              Estudantes de diferentes instituições já trouxeram sua formação
-              para a prática.
-            </h2>
+            <h2>Instituições de origem de participantes.</h2>
             <p>
               Participantes oriundos de diferentes instituições de ensino já
               vivenciaram experiências práticas no ambiente do Laboratório Santa
@@ -478,16 +526,10 @@ function App() {
             </p>
           </Reveal>
           <div className="institution-list">
-            {[
-              "UNINOVE",
-              "UNICESUMAR",
-              "UNIP",
-              "UNISA",
-              "Universidade São Judas",
-              "UNG",
-              "UNISUL",
-            ].map((x) => (
-              <span key={x}>{x}</span>
+            {institutions.map(([name, logo]) => (
+              <figure key={name}>
+                <img src={logo} loading="lazy" alt={name} />
+              </figure>
             ))}
           </div>
           <p className="legal-note">
@@ -495,41 +537,6 @@ function App() {
             participantes. A menção não significa parceria, convênio ou vínculo
             institucional vigente.
           </p>
-        </section>
-
-        <section className="section gallery">
-          <Reveal>
-            <Eyebrow>GALERIA REAL</Eyebrow>
-            <h2>Veja de perto a experiência.</h2>
-          </Reveal>
-          <div className="gallery-grid">
-            {[
-              [
-                "./images/equipe-grupo.webp",
-                "Equipe e participantes no laboratório",
-              ],
-              ["./images/pratica-bancada.webp", "Formação prática na bancada"],
-              [
-                "./images/equipamentos.webp",
-                "Contato supervisionado com equipamentos",
-              ],
-              ["./images/congresso-wide.webp", "Dr. Paulo em congresso da área"],
-              [
-                "./images/equipe-wide.webp",
-                "Equipe do Laboratório Santa Helena",
-              ],
-            ].map(([src, alt], i) => (
-              <button
-                key={src}
-                className={`gallery-item g${i + 1}`}
-                onClick={() => setLightbox({ src, alt })}
-                aria-label={`Ampliar: ${alt}`}
-              >
-                <img src={src} loading="lazy" alt={alt} />
-                <ZoomIn size={20} />
-              </button>
-            ))}
-          </div>
         </section>
 
         <section id="para-quem" className="section section-anchor audience">
@@ -628,16 +635,11 @@ function App() {
         </section>
 
         <section className="section real-lab">
-          <div>
-            <img
-              src="./images/pratica-bancada.webp"
-              width="1000"
-              height="700"
-              loading="lazy"
-              alt="Ambiente real da bancada do Laboratório Santa Helena"
-            />
-          </div>
-          <Reveal>
+          <Reveal className="real-lab-index" aria-hidden="true">
+            <span>REAL</span>
+            <small>rotina · processo · responsabilidade</small>
+          </Reveal>
+          <Reveal className="real-lab-copy">
             <Eyebrow>AMBIENTE LABORATORIAL</Eyebrow>
             <h2>Você não aprende em uma simulação de laboratório.</h2>
             <p>
@@ -661,10 +663,10 @@ function App() {
         </section>
 
         <section id="participar" className="final-cta section-anchor">
-          <img
-            src="./images/equipe-wide.webp"
-            loading="lazy"
-            alt="Equipe e participantes do Laboratório Santa Helena"
+          <Photo
+            photo={photos.team}
+            sizes="100vw"
+            className="final-cta-photo"
           />
           <div>
             <Eyebrow light>SEU PRÓXIMO PASSO</Eyebrow>
@@ -695,20 +697,6 @@ function App() {
         <a className="mobile-cta" href={TEPAC_CONTACT_URL}>
           Quero participar <ArrowRight size={16} />
         </a>
-      )}
-      {lightbox && (
-        <div
-          className="lightbox"
-          role="dialog"
-          aria-modal="true"
-          aria-label={lightbox.alt}
-          onClick={() => setLightbox(null)}
-        >
-          <button aria-label="Fechar imagem">
-            <X />
-          </button>
-          <img src={lightbox.src} alt={lightbox.alt} />
-        </div>
       )}
     </div>
   );
