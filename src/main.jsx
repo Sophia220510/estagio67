@@ -18,49 +18,67 @@ const INSTAGRAM_URL = "https://www.instagram.com/pauloapbrandao/";
 
 const photos = {
   hero: {
-    src: "./images/pratica-bancada.webp",
-    srcSet:
-      "./images/pratica-bancada-640.webp 640w, ./images/pratica-bancada-960.webp 960w, ./images/pratica-bancada-1280.webp 1280w, ./images/pratica-bancada.webp 1609w",
-    width: 1609,
-    height: 1207,
-    position: "50% 45%",
-    alt: "Participantes em atividade prática na bancada do Laboratório Santa Helena",
+    src: "./images/tepac/hero-tepac-desktop.webp",
+    mobileSrc: "./images/tepac/hero-tepac-mobile.webp",
+    width: 1920,
+    height: 1080,
+    alt: "Aluno do TEPAC realizando pipetagem em ambiente laboratorial real",
   },
   portrait: {
-    src: "./images/paulo-retrato.webp",
-    srcSet:
-      "./images/paulo-retrato-640.webp 640w, ./images/paulo-retrato-960.webp 960w, ./images/paulo-retrato.webp 1035w",
-    width: 1035,
-    height: 1380,
-    position: "50% 25%",
-    alt: "Dr. Paulo Brandão diante do painel da Sociedade Brasileira de Análises Clínicas",
+    src: "./images/tepac/dr-paulo-pncq.webp",
+    width: 1000,
+    height: 996,
+    position: "50% 30%",
+    alt: "Dr. Paulo Brandão em evento profissional do PNCQ",
   },
   congress: {
-    src: "./images/congresso-portrait.webp",
-    srcSet:
-      "./images/congresso-portrait-640.webp 640w, ./images/congresso-portrait-960.webp 960w, ./images/congresso-portrait.webp 1035w",
-    width: 1035,
-    height: 1380,
-    position: "50% 20%",
-    alt: "Dr. Paulo Brandão durante o 50º Congresso Brasileiro de Análises Clínicas",
+    src: "./images/tepac/dr-paulo-fiis.webp",
+    width: 1200,
+    height: 795,
+    position: "50% 50%",
+    alt: "Dr. Paulo Brandão no Fórum Internacional de Lideranças da Saúde",
   },
-  equipment: {
-    src: "./images/equipamentos.webp",
-    srcSet:
-      "./images/equipamentos-640.webp 640w, ./images/equipamentos-960.webp 960w, ./images/equipamentos-1280.webp 1280w, ./images/equipamentos.webp 1609w",
-    width: 1609,
-    height: 1207,
-    position: "50% 42%",
-    alt: "Participantes operando equipamento sob acompanhamento no laboratório",
+  preparation: {
+    src: "./images/tepac/pratica-preparacao.webp",
+    width: 1200,
+    height: 848,
+    position: "50% 50%",
+    alt: "Alunos do TEPAC organizando amostras em atividade prática no laboratório",
+  },
+  collection: {
+    src: "./images/tepac/pratica-coleta.webp",
+    width: 1200,
+    height: 902,
+    position: "50% 50%",
+    alt: "Aluno do TEPAC realizando coleta supervisionada no Laboratório Santa Helena",
+  },
+  pipetting: {
+    src: "./images/tepac/pratica-pipetagem.webp",
+    width: 1200,
+    height: 898,
+    position: "50% 50%",
+    alt: "Aluno em treinamento de pipetagem durante formação prática do TEPAC",
+  },
+  biosafety: {
+    src: "./images/tepac/pratica-biosseguranca.webp",
+    width: 1200,
+    height: 900,
+    position: "50% 50%",
+    alt: "Participantes usando jalecos e luvas em prática supervisionada de coleta",
   },
   team: {
-    src: "./images/equipe-grupo.webp",
-    srcSet:
-      "./images/equipe-grupo-640.webp 640w, ./images/equipe-grupo-960.webp 960w, ./images/equipe-grupo-1280.webp 1280w, ./images/equipe-grupo.webp 1609w",
-    width: 1609,
-    height: 1207,
+    src: "./images/tepac/turma-tepac.webp",
+    width: 1200,
+    height: 929,
     position: "50% 40%",
-    alt: "Dr. Paulo Brandão com participantes no Laboratório Santa Helena",
+    alt: "Alunos e equipe do TEPAC reunidos no Laboratório Santa Helena",
+  },
+  graduation: {
+    src: "./images/tepac/formatura-tepac.webp",
+    width: 1200,
+    height: 1197,
+    position: "50% 35%",
+    alt: "Formandos do TEPAC em cerimônia de conclusão",
   },
 };
 
@@ -108,22 +126,25 @@ const practical = [
     n: "01",
     title: "Preparação",
     body: "Organização de materiais, equipamentos, bancada e identificação de amostras.",
+    photo: photos.preparation,
   },
   {
     n: "02",
     title: "Amostras",
     body: "Contato com recebimento, identificação, preparo, processamento e acompanhamento de análises.",
+    photo: photos.collection,
   },
   {
     n: "03",
     title: "Técnicas e equipamentos",
     body: "Execução supervisionada de técnicas compatíveis e compreensão dos processos da rotina.",
-    photo: photos.equipment,
+    photo: photos.pipetting,
   },
   {
     n: "04",
     title: "Qualidade e biossegurança",
     body: "Registros, conferências, controle de qualidade, EPIs, descarte, higienização e segurança.",
+    photo: photos.biosafety,
   },
 ];
 
@@ -331,6 +352,18 @@ function App() {
       <Header progress={progress} active={active} />
       <main>
         <section id="tepac" className="hero section-anchor">
+          <picture className="hero-background">
+            <source media="(max-width: 800px)" srcSet={photos.hero.mobileSrc} />
+            <img
+              src={photos.hero.src}
+              width={photos.hero.width}
+              height={photos.hero.height}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              alt={photos.hero.alt}
+            />
+          </picture>
           <div className="hero-copy reveal-static">
             <Eyebrow>TEPAC · PRÁTICA EM ANÁLISES CLÍNICAS</Eyebrow>
             <h1>
@@ -353,16 +386,9 @@ function App() {
               </Button>
             </div>
           </div>
-          <div className="hero-visual">
-            <Photo
-              photo={photos.hero}
-              sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1200px) 48vw, 620px"
-              priority
-            />
-            <span className="photo-label">
-              Formação em ambiente laboratorial real
-            </span>
-          </div>
+          <span className="photo-label">
+            Formação em ambiente laboratorial real
+          </span>
           <a className="scroll-cue" href="#dr-brandao">
             Conheça a experiência <ArrowDown size={16} />
           </a>
@@ -488,8 +514,8 @@ function App() {
           </div>
           <Reveal className="congress-copy">
             <Eyebrow>ATUAÇÃO PRESENTE NA ÁREA</Eyebrow>
-            <b>50º CBAC</b>
-            <h2>Presidente · 2025</h2>
+            <b>FIIS</b>
+            <h2>Liderança e representação nos encontros da área da saúde.</h2>
             <p>
               Uma trajetória que também passa por entidades profissionais,
               docência, congressos e formação continuada.
@@ -603,6 +629,25 @@ function App() {
             participantes. A menção não significa parceria, convênio ou vínculo
             institucional vigente.
           </p>
+        </section>
+
+        <section id="conclusao" className="section graduation">
+          <Reveal className="graduation-image">
+            <Photo
+              photo={photos.graduation}
+              sizes="(max-width: 800px) calc(100vw - 32px), 58vw"
+            />
+          </Reveal>
+          <Reveal className="graduation-copy">
+            <Eyebrow>TRAJETÓRIA E CONQUISTA</Eyebrow>
+            <h2>A prática também se transforma em conclusão e pertencimento.</h2>
+            <p>
+              Cada turma representa uma trajetória construída entre estudo,
+              responsabilidade e experiência real — um resultado concreto para
+              quem escolheu aproximar a formação da rotina profissional.
+            </p>
+            <strong>Formação vivida. Conquista compartilhada.</strong>
+          </Reveal>
         </section>
 
         <section id="para-quem" className="section section-anchor audience">
