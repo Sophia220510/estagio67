@@ -53,11 +53,11 @@ const photos = {
     alt: "Aluno do TEPAC realizando coleta supervisionada no Laboratório Santa Helena",
   },
   pipetting: {
-    src: "./images/tepac/pratica-pipetagem.webp",
-    width: 1200,
-    height: 898,
+    src: "./images/equipamentos-1280.webp",
+    width: 1280,
+    height: 960,
     position: "50% 50%",
-    alt: "Aluno em treinamento de pipetagem durante formação prática do TEPAC",
+    alt: "Participantes do TEPAC utilizando equipamento em atividade laboratorial supervisionada",
   },
   biosafety: {
     src: "./images/tepac/pratica-biosseguranca.webp",
@@ -79,6 +79,13 @@ const photos = {
     height: 1197,
     position: "50% 35%",
     alt: "Formandos do TEPAC em cerimônia de conclusão",
+  },
+  laboratory: {
+    src: "./images/tepac/ambiente-laboratorial.webp",
+    width: 1280,
+    height: 800,
+    position: "50% 50%",
+    alt: "Profissionais em procedimento de coleta no ambiente real do Laboratório Santa Helena",
   },
 };
 
@@ -746,9 +753,11 @@ function App() {
         </section>
 
         <section className="section real-lab">
-          <Reveal className="real-lab-index" aria-hidden="true">
-            <span>REAL</span>
-            <small>rotina · processo · responsabilidade</small>
+          <Reveal className="real-lab-photo">
+            <Photo
+              photo={photos.laboratory}
+              sizes="(max-width: 800px) calc(100vw - 32px), 520px"
+            />
           </Reveal>
           <Reveal className="real-lab-copy">
             <Eyebrow>AMBIENTE LABORATORIAL</Eyebrow>
