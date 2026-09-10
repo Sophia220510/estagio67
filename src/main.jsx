@@ -521,7 +521,7 @@ function App() {
           </div>
           <Reveal className="congress-copy">
             <Eyebrow>ATUAÇÃO PRESENTE NA ÁREA</Eyebrow>
-            <b>FIIS</b>
+            <b>FILIS</b>
             <h2>Liderança e representação nos encontros da área da saúde.</h2>
             <p>
               Uma trajetória que também passa por entidades profissionais,
@@ -535,9 +535,10 @@ function App() {
             <Eyebrow>NA PRÁTICA</Eyebrow>
             <h2>O laboratório deixa de ser apenas conteúdo de aula.</h2>
             <p>
-              No TEPAC, a formação busca aproximar o participante da rotina
-              prática das Análises Clínicas, dentro das atividades permitidas
-              para sua modalidade, formação e supervisão.
+              No Programa de Treinamento Especializado Prático em Análises
+              Clínicas (TEPAC), a formação busca aproximar o participante da
+              rotina prática das Análises Clínicas, dentro das atividades
+              permitidas para sua modalidade, formação e supervisão.
             </p>
           </Reveal>
           <div className="lab-process" aria-label="Fluxo da experiência prática">
